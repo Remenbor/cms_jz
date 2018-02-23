@@ -10,6 +10,7 @@ class DepartmentsController < ApplicationController
   # GET /departments/1
   # GET /departments/1.json
   def show
+    @department = Department.find(params[:id])
   end
 
   # GET /departments/new
@@ -19,6 +20,7 @@ class DepartmentsController < ApplicationController
 
   # GET /departments/1/edit
   def edit
+    @department = Department.find(params[:id])
   end
 
   # POST /departments

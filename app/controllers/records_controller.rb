@@ -10,6 +10,7 @@ class RecordsController < ApplicationController
   # GET /records/1
   # GET /records/1.json
   def show
+    @record = Record.find(params[:id])
   end
 
   # GET /records/new
@@ -19,6 +20,7 @@ class RecordsController < ApplicationController
 
   # GET /records/1/edit
   def edit
+    @record = Record.find(params[:id])
   end
 
   # POST /records

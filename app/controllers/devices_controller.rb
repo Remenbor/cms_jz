@@ -10,6 +10,7 @@ class DevicesController < ApplicationController
   # GET /devices/1
   # GET /devices/1.json
   def show
+    @device = Device.find(params[:id])
   end
 
   # GET /devices/new
@@ -19,6 +20,7 @@ class DevicesController < ApplicationController
 
   # GET /devices/1/edit
   def edit
+    @device = Device.find(params[:id])
   end
 
   # POST /devices

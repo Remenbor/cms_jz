@@ -10,6 +10,7 @@ class PermissionsController < ApplicationController
   # GET /permissions/1
   # GET /permissions/1.json
   def show
+    @permission = Permission.find(params[:id])
   end
 
   # GET /permissions/new
@@ -19,6 +20,7 @@ class PermissionsController < ApplicationController
 
   # GET /permissions/1/edit
   def edit
+    @permission = Permission.find(params[:id])
   end
 
   # POST /permissions
