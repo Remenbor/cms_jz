@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @device.name %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @device.model %>
+</p>
+
+<p>
+  <strong>Serial num:</strong>
+  <%= @device.serial_num %>
+</p>
+
+<p>
+  <strong>Buy date:</strong>
+  <%= @device.buy_date %>
+</p>
+
+<p>
+  <strong>Age limit:</strong>
+  <%= @device.age_limit %>
+</p>
+
+<p>
+  <strong>Borrower:</strong>
+  <%= @device.borrower %>
+</p>
+
+<p>
+  <strong>Loan date:</strong>
+  <%= @device.loan_date %>
+</p>
+
+<p>
+  <strong>Return date:</strong>
+  <%= @device.return_date %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @device.state %>
+</p>
+
+<%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Back', devices_path %>

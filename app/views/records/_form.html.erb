@@ -1,0 +1,37 @@
+<%= form_with(model: record, local: true) do |form| %>
+  <% if record.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(record.errors.count, "error") %> prohibited this record from being saved:</h2>
+
+      <ul>
+      <% record.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :serial_num %>
+    <%= form.text_field :serial_num, id: :record_serial_num %>
+  </div>
+
+  <div class="field">
+    <%= form.label :borrower %>
+    <%= form.text_field :borrower, id: :record_borrower %>
+  </div>
+
+  <div class="field">
+    <%= form.label :loan_date %>
+    <%= form.date_select :loan_date, id: :record_loan_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :return_date %>
+    <%= form.date_select :return_date, id: :record_return_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
