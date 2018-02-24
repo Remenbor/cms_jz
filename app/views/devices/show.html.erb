@@ -46,4 +46,7 @@
 </p>
 
 <%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Destroy', device_path(@device),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', devices_path %>

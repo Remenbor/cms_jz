@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user #only: [:edit, :update]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: :destroy
 
   def index
     @users = User.all
@@ -61,5 +62,9 @@ class UsersController < ApplicationController
   def correct_user
     #@user = User.find(params[:id])
     redirect_to(root_url) unless @user == currect_user
+  end
+
+  def admin_user
+    redirect_to(root_url) unless currect_user.admin?
   end
 end
