@@ -4,9 +4,10 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
+          <li><%= link_to "个人", user_path(@current_user) %></li>
           <li><%= link_to "部门", departments_path %></li>
           <li><%= link_to "办公用品", devices_path %></li>
-          <li><%= link_to "个人", users_path %></li>
+          <li><%= link_to "所有人", users_path %></li>
           <li>
             <%= link_to "Log out", logout_path, method: :delete %>
           </li>
