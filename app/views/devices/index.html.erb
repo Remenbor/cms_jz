@@ -1,43 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Devices</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Model</th>
-      <th>Serial num</th>
-      <th>Buy date</th>
-      <th>Age limit</th>
-      <th>Borrower</th>
-      <th>Loan date</th>
-      <th>Return date</th>
-      <th>State</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @devices.each do |device| %>
-      <tr>
-        <td><%= device.name %></td>
-        <td><%= device.model %></td>
-        <td><%= device.serial_num %></td>
-        <td><%= device.buy_date %></td>
-        <td><%= device.age_limit %></td>
-        <td><%= device.borrower %></td>
-        <td><%= device.loan_date %></td>
-        <td><%= device.return_date %></td>
-        <td><%= device.state %></td>
-        <td><%= link_to 'Show', device %></td>
-        <td><%= link_to 'Edit', edit_device_path(device) %></td>
-        <td><%= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Device', new_device_path %>
+<% provide(:title, 'All devices') %>
+<h1>All devices</h1>
+<ul class="devices">
+  <% @devices.each do |device| %>
+    <li>
+      <%= link_to device.name, device %>
+    </li>
+  <% end %>
+</ul>
