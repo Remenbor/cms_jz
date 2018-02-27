@@ -1,10 +1,13 @@
 module SessionsHelper
+  #创建临时cookie 加密ID 登入指定用户
   def log_in(user)
     session[:user_id] = user.id
   end
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
+    #ID不存在返回nil
+    #User.find(session[:user_id]),不存在,find抛出异常（未登录session[:user_id]=nil）
   end
 
   def logged_in?
