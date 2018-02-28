@@ -10,6 +10,10 @@ module SessionsHelper
     #User.find(session[:user_id]),不存在,find抛出异常（未登录session[:user_id]=nil）
   end
 
+  def current_user?(user)
+    user == current_user
+  end
+
   def logged_in?
     !current_user.nil?
   end
@@ -17,5 +21,9 @@ module SessionsHelper
   def log_out
     session.delete(:user_id)
     @current_user = nil
+  end
+
+  def user_permission_id?(user)
+    UserPermission.where(user_id: user.id).select("permission_id").first.permission_id == 1
   end
 end

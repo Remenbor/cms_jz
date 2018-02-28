@@ -42,8 +42,12 @@
   <strong>State:</strong>
   <%= @user.state %>
 </p>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Destroy', user_path(@user),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %> |
+<% if user_permission_id?(current_user) or current_user?(@user) %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
+<% if user_permission_id?(current_user) && !current_user?(@user) %>
+  <%= link_to 'Destroy', user_path(@user),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', users_path %>

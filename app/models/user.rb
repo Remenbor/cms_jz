@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :user_permissions
+  has_many :user_permission
   has_many :permissions, through: :user_permission
   has_many :devices
   belongs_to :department

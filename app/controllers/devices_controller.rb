@@ -1,5 +1,6 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:edit, :update, :destroy]
 
   # GET /devices
   # GET /devices.json
@@ -65,9 +66,16 @@ class DevicesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_device
-      @device = Device.find(params[:id])
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Please log in"
+      redirect_to login_url
     end
+  end
+
+  def admin_user
+    redirect_to(root_url) unless user_permission_id?(current_user)
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params

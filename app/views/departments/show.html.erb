@@ -15,8 +15,18 @@
   <%= @department.parent %>
 </p>
 
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Destroy', department_path(@department),
+<ul class="users">
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.name, user %>
+    </li>
+  <% end %>
+</ul>
+
+<% if user_permission_id?(current_user) && !current_user?(@user) %>
+  <%= link_to 'Edit', edit_department_path(@department) %> |
+  <%= link_to 'Destroy', department_path(@department),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', departments_path %>

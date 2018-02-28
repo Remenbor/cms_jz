@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
   end
 
   def create
@@ -60,11 +60,11 @@ class UsersController < ApplicationController
   end
 
   def correct_user
-    #@user = User.find(params[:id])
-    redirect_to(root_url) unless @user == currect_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless (@user == current_user or user_permission_id?(current_user))
   end
 
   def admin_user
-    redirect_to(root_url) unless currect_user.admin?
+    redirect_to(root_url) unless user_permission_id?(current_user)
   end
 end

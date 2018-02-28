@@ -7,4 +7,6 @@
     </li>
   <% end %>
 </ul>
-<%= link_to 'New user', new_user_path %>
+<% if user_permission_id?(current_user) && !current_user?(@user) %>
+  <%= link_to 'New user', new_user_path %>
+<% end %>

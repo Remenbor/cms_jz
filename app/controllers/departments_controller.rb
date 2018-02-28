@@ -1,5 +1,6 @@
 class DepartmentsController < ApplicationController
-  before_action :set_department, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:edit, :update, :destroy]
 
   # GET /departments
   # GET /departments.json
@@ -11,6 +12,7 @@ class DepartmentsController < ApplicationController
   # GET /departments/1.json
   def show
     @department = Department.find(params[:id])
+    @department.id == 1 ? (@users = User.all) : (@users = User.where(department_id: @department.id))
   end
 
   # GET /departments/new
@@ -65,9 +67,16 @@ class DepartmentsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_department
-      @department = Department.find(params[:id])
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Please log in"
+      redirect_to login_url
     end
+  end
+
+  def admin_user
+    redirect_to(root_url) unless user_permission_id?(current_user)
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def department_params
