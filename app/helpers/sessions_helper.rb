@@ -26,4 +26,5 @@ module SessionsHelper
   def user_permission_id?(user)
     UserPermission.where(user_id: user.id).select("permission_id").first.permission_id == 1
   end
+
 end

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :permissions
   resources :records
   resources :devices
+  post '/devices/:id', to: 'devices#loan'
   resources :departments
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

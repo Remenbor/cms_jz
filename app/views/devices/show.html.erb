@@ -45,6 +45,11 @@
   <%= @device.state %>
 </p>
 
+
+<p>
+  <%= button_to "借用", action: :loan, method: :put %>
+</p>
+
 <% if user_permission_id?(current_user) && !current_user?(@user) %>
   <%= link_to 'Edit', edit_device_path(@device) %> |
   <%= link_to 'Destroy', device_path(@device),

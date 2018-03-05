@@ -1,6 +1,6 @@
 class DevicesController < ApplicationController
-  before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
-  before_action :admin_user, only: [:edit, :update, :destroy]
+  #before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
+  #before_action :admin_user, only: [:edit, :update, :destroy]
 
   # GET /devices
   # GET /devices.json
@@ -29,28 +29,22 @@ class DevicesController < ApplicationController
   def create
     @device = Device.new(device_params)
 
-    respond_to do |format|
-      if @device.save
-        format.html { redirect_to @device, notice: 'Device was successfully created.' }
-        format.json { render :show, status: :created, location: @device }
-      else
-        format.html { render :new }
-        format.json { render json: @device.errors, status: :unprocessable_entity }
-      end
+    if @device.save
+      redirect_to @device
+    else
+      render 'new'
     end
   end
 
   # PATCH/PUT /devices/1
   # PATCH/PUT /devices/1.json
   def update
-    respond_to do |format|
-      if @device.update(device_params)
-        format.html { redirect_to @device, notice: 'Device was successfully updated.' }
-        format.json { render :show, status: :ok, location: @device }
-      else
-        format.html { render :edit }
-        format.json { render json: @device.errors, status: :unprocessable_entity }
-      end
+    @device = Device.find(params[:id])
+    if @device.update(device_params)
+      @device.loan_record(@device)
+      redirect_to @device
+    else
+      render 'edit'
     end
   end
 
@@ -62,6 +56,16 @@ class DevicesController < ApplicationController
       format.html { redirect_to devices_url, notice: 'Device was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def loan
+    dev = Device.find(params[:id])
+    return_result = dev.update_state(1)
+    if return_result
+      redirect_to dev
+    else
+    end
+    #connection.execute("UPDATE devices SET state = 1")
   end
 
   private
