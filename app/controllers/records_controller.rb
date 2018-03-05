@@ -1,5 +1,6 @@
 class RecordsController < ApplicationController
-  before_action :set_record, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:edit, :update, :destroy]
 
   def index
     @records = Record.all
@@ -53,8 +54,15 @@ class RecordsController < ApplicationController
 
   private
 
-    def set_record
-      @record = Record.find(params[:id])
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in"
+        redirect_to login_url
+      end
+    end
+
+    def admin_user
+      redirect_to(root_url) unless user_permission_id?(current_user)
     end
 
     def record_params

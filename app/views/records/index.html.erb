@@ -20,14 +20,16 @@
         <td><%= record.borrower %></td>
         <td><%= record.loan_date %></td>
         <td><%= record.return_date %></td>
-        <td><%= link_to 'Show', record %></td>
-        <td><%= link_to 'Edit', edit_record_path(record) %></td>
-        <td><%= link_to 'Destroy', record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if user_permission_id?(current_user) && !current_user?(@user) %>
+          <td><%= link_to 'Edit', edit_record_path(record) %></td>
+          <td><%= link_to 'Destroy', record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Record', new_record_path %>
+<% if user_permission_id?(current_user) && !current_user?(@user) %>
+  <%= link_to 'New Record', new_record_path %>
+<% end %>
