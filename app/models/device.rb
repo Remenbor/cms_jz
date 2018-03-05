@@ -1,9 +1,10 @@
 class Device < ApplicationRecord
-  #belongs_to :user
+  belongs_to :user, required: false
   has_many :records
+  after_save :loan_record
 
-  def loan_record(device)
-    Record.create(serial_num: device.serial_num, borrower: device.borrower, loan_date: Time.now.strftime('%Y-%m-%d'), return_date: "")
+  def loan_record
+    Record.create(serial_num: self.serial_num, borrower: self.borrower, loan_date: Time.now.strftime('%Y-%m-%d'), return_date: "")
   end
 
   def update_state(state)

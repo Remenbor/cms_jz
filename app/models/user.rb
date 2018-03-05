@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :user_permission
   has_many :permissions, through: :user_permission
   has_many :devices
-  belongs_to :department
+  belongs_to :department, required: false
 
   before_save { self.email = email.downcase}
 

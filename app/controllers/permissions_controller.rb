@@ -1,30 +1,22 @@
 class PermissionsController < ApplicationController
   before_action :set_permission, only: [:show, :edit, :update, :destroy]
-
-  # GET /permissions
-  # GET /permissions.json
+  
   def index
     @permissions = Permission.all
   end
 
-  # GET /permissions/1
-  # GET /permissions/1.json
   def show
     @permission = Permission.find(params[:id])
   end
 
-  # GET /permissions/new
   def new
     @permission = Permission.new
   end
 
-  # GET /permissions/1/edit
   def edit
     @permission = Permission.find(params[:id])
   end
 
-  # POST /permissions
-  # POST /permissions.json
   def create
     @permission = Permission.new(permission_params)
 
@@ -39,8 +31,6 @@ class PermissionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /permissions/1
-  # PATCH/PUT /permissions/1.json
   def update
     respond_to do |format|
       if @permission.update(permission_params)
@@ -53,8 +43,6 @@ class PermissionsController < ApplicationController
     end
   end
 
-  # DELETE /permissions/1
-  # DELETE /permissions/1.json
   def destroy
     @permission.destroy
     respond_to do |format|
@@ -64,12 +52,11 @@ class PermissionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+  
     def set_permission
       @permission = Permission.find(params[:id])
     end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
+  
     def permission_params
       params.require(:permission).permit(:name)
     end
