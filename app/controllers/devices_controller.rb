@@ -38,6 +38,7 @@ class DevicesController < ApplicationController
   end
 
   def destroy
+    @device = Device.find(params[:id])
     @device.destroy
     respond_to do |format|
       format.html { redirect_to devices_url, notice: 'Device was successfully destroyed.' }
@@ -47,7 +48,7 @@ class DevicesController < ApplicationController
 
   def loan
     dev = Device.find(params[:id])
-    return_result = dev.update_state(1)
+    return_result = dev.update_state(1, current_user.name)
     if return_result
       redirect_to dev
     else

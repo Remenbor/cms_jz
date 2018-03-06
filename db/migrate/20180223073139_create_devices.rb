@@ -7,9 +7,9 @@ class CreateDevices < ActiveRecord::Migration[5.1]
       t.date :buy_date
       t.integer :age_limit
       t.string :borrower
-      t.date :loan_date
-      t.date :return_date
-      t.integer :state
+      t.date :loan_date, default: nil
+      t.date :return_date, default: nil
+      t.integer :state, default: 0
 
       t.timestamps
     end

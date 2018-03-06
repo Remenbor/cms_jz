@@ -45,6 +45,7 @@ class RecordsController < ApplicationController
   end
 
   def destroy
+    @record = Record.find(params[:id])
     @record.destroy
     respond_to do |format|
       format.html { redirect_to records_url, notice: 'Record was successfully destroyed.' }
