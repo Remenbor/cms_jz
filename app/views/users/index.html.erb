@@ -1,12 +1,51 @@
-<% provide(:title, 'All users') %>
-<h1>All users</h1>
-<ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user.name, user %>
-    </li>
-  <% end %>
-</ul>
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:coding) %></th>
+      <th><%= model_class.human_attribute_name(:department_id) %></th>
+      <th><%= model_class.human_attribute_name(:role) %></th>
+      <th><%= model_class.human_attribute_name(:sex) %></th>
+      <th><%= model_class.human_attribute_name(:age) %></th>
+      <th><%= model_class.human_attribute_name(:phone) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:state) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.id, user_path(user) %></td>
+        <td><%= user.name %></td>
+        <td><%= user.coding %></td>
+        <td><%= user.department_id %></td>
+        <td><%= user.role %></td>
+        <td><%= user.sex %></td>
+        <td><%= user.age %></td>
+        <td><%= user.phone %></td>
+        <td><%= user.email %></td>
+        <td><%= user.state %></td>
+        <td>
+          <% if user_permission_id?(current_user) or current_user?(@user) %>
+            <%= link_to 'Edit', edit_user_path(user) %> |
+          <% end %>
+          <% if user_permission_id?(current_user) && !current_user?(@user) %>
+            <%= link_to 'Destroy', user_path(user),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <% if user_permission_id?(current_user) && !current_user?(@user) %>
   <%= link_to 'New user', new_user_path %>
 <% end %>

@@ -1,62 +1,81 @@
-<%= form_with(model: device, local: true) do |form| %>
-  <% if device.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(device.errors.count, "error") %> prohibited this device from being saved:</h2>
+<%= form_for @device, :html => { :class => "form-horizontal device" } do |f| %>
 
-      <ul>
-      <% device.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @device.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @device.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :device_name %>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :model, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :model, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :serial_num, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :serial_num, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :buy_date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :buy_date, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :age_limit, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :age_limit, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :borrower, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :borrower, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :loan_date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :loan_date, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :return_date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :return_date, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :state, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :state, :class => 'form-control' %>
+    </div>
+  </div>
+<br />
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                devices_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :model %>
-    <%= form.text_field :model, id: :device_model %>
-  </div>
-
-  <div class="field">
-    <%= form.label :serial_num %>
-    <%= form.text_field :serial_num, id: :device_serial_num %>
-  </div>
-
-  <div class="field">
-    <%= form.label :buy_date %>
-    <%= form.date_select :buy_date, id: :device_buy_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :age_limit %>
-    <%= form.number_field :age_limit, id: :device_age_limit %>
-  </div>
-
-  <div class="field">
-    <%= form.label :borrower %>
-    <%= form.text_field :borrower, id: :device_borrower %>
-  </div>
-
-  <div class="field">
-    <%= form.label :loan_date %>
-    <%= form.date_select :loan_date, id: :device_loan_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :return_date %>
-    <%= form.date_select :return_date, id: :device_return_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.number_field :state, id: :device_state %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

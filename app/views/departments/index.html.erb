@@ -1,12 +1,39 @@
-<% provide(:title, 'All departments') %>
-<h1>All departments</h1>
-<ul class="departments">
-  <% @departments.each do |department| %>
-    <li>
-      <%= link_to department.name, department %>
-    </li>
-  <% end %>
-</ul>
+<%- model_class = Department -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:coding) %></th>
+      <th><%= model_class.human_attribute_name(:parent) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @departments.each do |department| %>
+      <tr>
+        <td><%= link_to department.id, department_path(department) %></td>
+        <td><%= department.name %></td>
+        <td><%= department.coding %></td>
+        <td><%= department.parent %></td>
+        <td><%= department.created_at %></td>
+        <td>
+          <% if user_permission_id?(current_user) && !current_user?(@user) %>
+            <%= link_to 'Edit', edit_department_path(department) %> |
+            <%= link_to 'Destroy', department_path(department),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <% if user_permission_id?(current_user) && !current_user?(@user) %>
   <%= link_to 'New department', new_department_path %>
 <% end %>

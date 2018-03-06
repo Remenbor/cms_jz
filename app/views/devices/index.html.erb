@@ -1,12 +1,51 @@
-<% provide(:title, 'All devices') %>
-<h1>All devices</h1>
-<ul class="devices">
-  <% @devices.each do |device| %>
-    <li>
-      <%= link_to device.name, device %>
-    </li>
-  <% end %>
-</ul>
+<%- model_class = Device -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:model) %></th>
+      <th><%= model_class.human_attribute_name(:serial_num) %></th>
+      <th><%= model_class.human_attribute_name(:buy_date) %></th>
+      <th><%= model_class.human_attribute_name(:age_limit) %></th>
+      <th><%= model_class.human_attribute_name(:borrower) %></th>
+      <th><%= model_class.human_attribute_name(:loan_date) %></th>
+      <th><%= model_class.human_attribute_name(:return_date) %></th>
+      <th><%= model_class.human_attribute_name(:state) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @devices.each do |device| %>
+      <tr>
+        <td><%= link_to device.id, device_path(device) %></td>
+        <td><%= device.name %></td>
+        <td><%= device.model %></td>
+        <td><%= device.serial_num %></td>
+        <td><%= device.buy_date %></td>
+        <td><%= device.age_limit %></td>
+        <td><%= device.borrower %></td>
+        <td><%= device.loan_date %></td>
+        <td><%= device.return_date %></td>
+        <td><%= device.state %></td>
+        <td><%= device.created_at %></td>
+        <td>
+          <% if user_permission_id?(current_user) && !current_user?(@user) %>
+            <%= link_to 'Edit', edit_device_path(device) %> |
+            <%= link_to 'Destroy', device_path(device),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <% if user_permission_id?(current_user) && !current_user?(@user) %>
   <%= link_to 'New device', new_device_path %>
 <% end %>
