@@ -27,13 +27,9 @@
   <dt><strong><%= model_class.human_attribute_name(:authentication_token) %>:</strong></dt>
   <dd><%= @user.authentication_token %></dd>
 </dl>
-
+<% if user_permission_id?(current_user) or current_user?(@user) %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_user_path(@user), :class => 'btn btn-default' %> |
+<% end %>
 <%= link_to t('.back', :default => t("helpers.links.back")),
-              users_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_user_path(@user), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              user_path(@user),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+            users_path, :class => 'btn btn-default'  %>

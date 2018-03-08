@@ -24,7 +24,9 @@
     <th><%= model_class.human_attribute_name(:phone) %></th>
     <th><%= model_class.human_attribute_name(:email) %></th>
     <th><%= model_class.human_attribute_name(:state) %></th>
-    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    <% if user_permission_id?(current_user) && !current_user?(@user) %>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    <% end %>
   </tr>
   </thead>
   <tbody>

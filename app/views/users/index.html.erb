@@ -15,7 +15,9 @@
       <th><%= model_class.human_attribute_name(:phone) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
       <th><%= model_class.human_attribute_name(:state) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% if user_permission_id?(current_user) && !current_user?(@user) %>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -32,10 +34,8 @@
         <td><%= user.email %></td>
         <td><%= user.state %></td>
         <td>
-          <% if user_permission_id?(current_user) or current_user?(@user) %>
-            <%= link_to 'Edit', edit_user_path(user) %> |
-          <% end %>
           <% if user_permission_id?(current_user) && !current_user?(@user) %>
+            <%= link_to 'Edit', edit_user_path(user) %> |
             <%= link_to 'Destroy', user_path(user),
                         method: :delete,
                         data: { confirm: 'Are you sure?' } %>
