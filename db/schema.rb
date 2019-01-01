@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223075158) do
+ActiveRecord::Schema.define(version: 20180228020547) do
 
   create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20180223075158) do
     t.string "borrower"
     t.date "loan_date"
     t.date "return_date"
-    t.integer "state"
+    t.integer "state", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20180223075158) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "authentication_token"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

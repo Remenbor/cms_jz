@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://gems.ruby-china.com'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -8,7 +8,7 @@ end
 gem 'pry'
 gem 'pry-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~>5.1.4'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'mysql2'
@@ -58,6 +58,7 @@ gem 'bcrypt'
 gem 'bootstrap'
 gem 'jquery-rails'
 #gem 'bootstrap-sprockets'
-gem 'therubyracer'
-gem 'less-rails'
+gem 'mini_racer'
+#gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+#gem 'ffi', '1.9.18'
